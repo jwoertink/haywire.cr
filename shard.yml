@@ -8,5 +8,8 @@ crystal: 0.22.0
 
 license: MIT
 
+scripts:
+  postinstall: make -C ext dependencies
+
 #libraries:
 #  libhaywire: "1.0"
