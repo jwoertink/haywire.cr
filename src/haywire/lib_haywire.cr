@@ -6,6 +6,7 @@ lib LibHaywire
   alias UInt = LibC::UInt
   alias SizeT = LibC::SizeT
   alias UShort = LibC::UShort
+  HTTP_STATUS_200 = "200 OK"
 
   struct HW_String
     value : Char*
@@ -47,7 +48,7 @@ lib LibHaywire
   fun init_from_config = hw_init_from_config(configuration_filename : Char*) : Int
   fun init_with_config = hw_init_with_config(config : Config*) : Int
   fun http_open = hw_http_open() : Int
-  fun http_add_route = hw_http_add_route(route : Char*, http_request_callback : ->, user_data : Void*)
+  fun http_add_route = hw_http_add_route(route : Char*, callback : (HTTP_Request, HTTP_Response, Void*)->, user_data : Void*)
   fun get_header = hw_get_header(request : HTTP_Request*, key : HW_String*) : HW_String*
 
   fun free_http_response = hw_free_http_response(response : HTTP_Response*) : Void
@@ -55,7 +56,7 @@ lib LibHaywire
   fun set_response_status_code = hw_set_response_status_code(response : HTTP_Response*, status_code : HW_String*) : Void
   fun set_response_header = hw_set_response_header(response : HTTP_Response*, name : HW_String*, value : HW_String*) : Void
   fun set_body = hw_set_body(response : HTTP_Response*, body : HW_String*) : Void
-  fun http_response_send = hw_http_response_send(response : HTTP_Response*, user_data : Void*, http_response_complete_callback : ->)
+  fun http_response_send = hw_http_response_send(response : HTTP_Response*, user_data : Void*, callback : (HTTP_Request, HTTP_Response, Void* )->)
 
   fun print_request_headers = hw_print_request_headers(request : HTTP_Request*)
 end
