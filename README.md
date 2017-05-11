@@ -1,6 +1,6 @@
 # haywire.cr
 
-TODO: Write a description here
+A crystal c-binding around [Haywire](https://github.com/haywire/haywire) used for HTTP server/client
 
 ## Installation
 
@@ -8,25 +8,40 @@ Add this to your application's `shard.yml`:
 
 ```yaml
 dependencies:
-  haywire.cr:
-    github: [your-github-name]/haywire.cr
+  haywire:
+    github: jwoertink/haywire.cr
 ```
 
 ## Usage
 
+**NOTE** currently broken
+
 ```crystal
-require "haywire.cr"
+require "haywire"
+
+# Create a config
+config = LibHaywire::Config.new
+config.http_listen_address = "0.0.0.0"
+config.http_listen_port = 3000
+config.thread_count = 1
+
+# This throws a Invalid memory access error :(
+LibHaywire.init_with_config(pointerof(config))
+LibHaywire.http_add_route("/", -> {
+  "Hello World"
+}, nil)
+LibHaywire.http_open
 ```
 
-TODO: Write usage instructions here
 
 ## Development
 
-TODO: Write development instructions here
+The goal would be to have a 1 to 1 mapping to crystal's built in `HTTP` library. Then being able to switch it out for this (provided this is any better?)
+
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/haywire.cr/fork )
+1. Fork it ( https://github.com/jwoertink/haywire/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -34,4 +49,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) Jeremy Woertink - creator, maintainer
+- [jwoertink](https://github.com/jwoertink) Jeremy Woertink - creator, maintainer
