@@ -1,4 +1,4 @@
-name: haywire.cr
+name: haywire
 version: 0.1.0
 
 authors:
@@ -7,3 +7,6 @@ authors:
 crystal: 0.22.0
 
 license: MIT
+
+#libraries:
+#  libhaywire: "1.0"
