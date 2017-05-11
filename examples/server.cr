@@ -11,7 +11,6 @@ config.max_request_size = 1048576
 config.tcp_nodelay = true
 config.listen_backlog = 0
 
-# This throws a Invalid memory access error :(
 LibHaywire.init_with_config(pointerof(config))
 LibHaywire.http_add_route("/", ->(request : LibHaywire::HTTP_Request, response : LibHaywire::HTTP_Response, user_data : Void*) {
   status_code = LibHaywire::HW_String.new(value: LibHaywire::HTTP_STATUS_200, length: 6)
